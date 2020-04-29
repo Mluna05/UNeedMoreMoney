@@ -4,7 +4,7 @@ import './App.css';
 //container
 import Container from './components/Container';
 
-function App() {
+const App = () =>  {
   return (
     <div className="App">
     	<Container/>

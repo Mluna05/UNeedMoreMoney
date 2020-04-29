@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../images/uNeedMoreMoney.png';
 
 
- function TopBar() {
+ const TopBar = () =>  {
   return (
     <div className="TopBarContainer" >
 

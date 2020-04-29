@@ -55,10 +55,9 @@ span.LogoImg {
     position: absolute;
     width: 80%;
     min-height: 26em;
-    height: auto;
+    height: 63%;
     z-index: 4;
-    background-color: white;
-    display: none;
+    background-color: rgba(79, 109, 122, 0.9);
 }
 
 .PaymentItem{
@@ -69,6 +68,7 @@ span.LogoImg {
     background-color: #C0D6DF;
     margin: 1em auto;
     top: 2em;
+    box-shadow: 2px 2px 7px #4F6D7A;
 }
 
 .ImgType {
@@ -120,10 +120,11 @@ span.LogoImg {
 }
 
 .InfoMonto {
-    position: relative;
-    width: 30%;
+    position: absolute;
+    width: 20%;
     display: inline-block;
-    top: 23%;
+    right: 0px;
+    bottom: 1em;
     text-align: right;
 }
 
@@ -132,3 +133,79 @@ span.LogoImg {
     right: 0px;
 }
 
+.InfoBtnEdit {
+    margin: .2em;
+}
+
+.InfoBtnCerrar {
+    margin: .2em;
+}
+
+.addPaymentIcon{    
+    position: absolute;
+    top: 24%;
+    right: 11%;
+}
+
+.closeModal {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    color: white;
+}
+
+.editTitleScreen {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    margin-top: 1em;
+}
+
+.infoForm {
+    height: 90%;
+}
+
+.infoForm-icon {
+    width: 30%;
+    position: relative;
+    display: inline-block;
+    left: 2em;
+    top: 1em;
+}
+
+.infoForm-title {
+    width: 30%;
+    position: absolute;
+    display: inline-block;
+    top: 21%;
+}
+
+.infoForm-desc {
+    width: 30%;
+    position: absolute;
+    display: inline-block;
+    top: 37%;
+}
+
+.infoForm-date {
+    width: 30%;
+    position: absolute;
+    display: inline-block;
+    top: 56%;
+}
+
+.infoForm-amount {
+    width: 30%;
+    position: absolute;
+    display: inline-block;
+    top: 73%;
+}
+
+.btnAdd{
+    position: absolute;
+    right: 2em;
+    bottom: 4em;
+    width: 10em;
+    height: 3em;
+}
