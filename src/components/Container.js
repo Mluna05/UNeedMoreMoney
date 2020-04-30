@@ -7,35 +7,7 @@ import PaymentList from './PaymentList';
 
  const Container = () => {
 
-
-	const paymentPrime = { 
-						title:'', 
-						desc:'', 
-						amount:0,
-						date:'',
-						icon:''
-					  };
-
-
-const [payments, setPayments] = useState( [{ 
-						title:'BBVA', 
-						desc:'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta.', 
-						amount:100.00,
-						date:'01/04/2020',
-						icon:'check'
-					  },{ 
-						title:'Walmart', 
-						desc:'Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta.', 
-						amount:500.00,
-						date:'10/03/2020',
-						icon:'cash'
-					  }, { 
-						title:'Amazon', 
-						desc:'Doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis o beatae vitae dicta.', 
-						amount:300.00,
-						date:'15/02/2020',
-						icon:'online'
-					  }] );
+const [payments, setPayments] = useState( [] );
 
 	const [totalAmount, setTotalAmount] = useState( 0 );
 
@@ -57,7 +29,7 @@ const [payments, setPayments] = useState( [{
 
 	const addNewPayments = ( payment ) => {	
 		console.log(payment);
-		let paymentsUpdated = [...payments, { payment }] ;
+		let paymentsUpdated = [...payments, payment ] ;
 		setPayments( paymentsUpdated );
 	}
 

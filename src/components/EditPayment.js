@@ -27,17 +27,24 @@ const EditPayment = ({ activateEditMode, payment, addPaymentsInfo, idEdit, addNe
  	}
 
  	const onChange = (e) => {
+ 		valiDate(e.target.value);
 
- 		addPaymentsInfo( idEdit, e.target.name, e.target.value, payment );
+ 		//addPaymentsInfo( idEdit, e.target.name, e.target.value, payment );
  		
 	}
 
+	const valiDate = () =>{
+		console.log(payment);
+		//addNewPayments(payment);
+	}
+
 	const chargeNewPayment = () =>{
+		console.log(payment);
 		addNewPayments(payment);
 	}
 
 	 const displayAdd = () =>{
-	 	return idEdit==='' ? <button className="btnAdd" onClick={ chargeNewPayment }> Add </button> : null;
+	 	return idEdit==='' ? <div className="btnAdd" onClick={ chargeNewPayment }> Add </div> : null;
 	 }
 
   return (
@@ -74,8 +81,9 @@ const EditPayment = ({ activateEditMode, payment, addPaymentsInfo, idEdit, addNe
 	    		<div className="infoForm-desc">
 	    			<p>Description:</p>
 	    			<textarea value={ desc }
-	    				name='desc' 
-	    				maxLength = "255"
+	    				name='desc'
+	    				className='textAreaDesc' 
+	    				maxLength = '255'
 	    				onChange={ onChange }
 	    			/>
 	    		</div>
@@ -83,16 +91,17 @@ const EditPayment = ({ activateEditMode, payment, addPaymentsInfo, idEdit, addNe
 	    		<div className="infoForm-date">
 	    			<p>Payment Date:</p>
 	    			<input 
-	    				type="date" 
-	    				id="date" 
-	    				name='date' 
+	    				type="date"
+	    				id='date' 
+	    				name='date'
+	    				onChange={ onChange }
 	    				required
 	    			/>
 	    		</div>
 
 	    		<div className="infoForm-amount"> 
 	    			<p>Amount:</p>
-	    			$
+	    			$ 
 					<input
 						type='text'
 						name='amount'
