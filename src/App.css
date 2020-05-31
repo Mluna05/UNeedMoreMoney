@@ -204,7 +204,23 @@ span.LogoImg {
     width: 30%;
     position: absolute;
     display: inline-block;
-    top: 79%;
+    top: 80%;
+}
+
+.infoForm-baseErrorMsg{
+    position: absolute;
+    display: inline-block;
+    color: #daa62c;
+    font-size: 1em;
+    font-weight: bolder;
+}
+
+.infoForm-dateErrorMsg{
+    top: 74%;
+}
+
+.infoForm-amountErrorMsg{
+    top: 92%;
 }
 
 .btnAdd{
@@ -240,7 +256,7 @@ input[type="text"] {
     font-size: 14px;
 }
 
-input#date{
+input#date, input#amount{
     margin: 0.5em 0em;
     padding: 8px 20px;
     box-sizing: border-box;

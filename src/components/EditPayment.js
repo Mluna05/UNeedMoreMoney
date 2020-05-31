@@ -16,10 +16,10 @@ const EditPayment = ({ activateEditMode, payment, addPaymentsInfo, idEdit, addNe
 	const [newPayment, setNewPayment] = useState({});
 
  	if(!payment){
- 		payment = { title:'new', icon:'', desc:'', date:'', amount:0 };
+ 		payment = { title:'', icon:'', desc:'', date:'', amount:'0.00', amountError:'', dateError:'' };
  	}
  	
- 	let { title, icon, desc, date, amount } = {...payment};
+ 	let { title, icon, desc, date, amount, amountError, dateError } = {...payment};
 
 
  	const coseModal = () =>{
@@ -27,20 +27,14 @@ const EditPayment = ({ activateEditMode, payment, addPaymentsInfo, idEdit, addNe
  	}
 
  	const onChange = (e) => {
- 		valiDate(e.target.value);
+	  	addPaymentsInfo( idEdit, e.target.name, e.target.value, payment );
+ 	}
 
- 		//addPaymentsInfo( idEdit, e.target.name, e.target.value, payment );
  		
-	}
 
-	const valiDate = () =>{
-		console.log(payment);
-		//addNewPayments(payment);
-	}
 
 	const chargeNewPayment = () =>{
-		console.log(payment);
-		addNewPayments(payment);
+  		 	addNewPayments(payment);
 	}
 
 	 const displayAdd = () =>{
@@ -59,7 +53,7 @@ const EditPayment = ({ activateEditMode, payment, addPaymentsInfo, idEdit, addNe
 	    		<div className="infoForm-icon"> 
 	    			<img src={ checkCardImg } alt={ icon } />
 	    			<p>Type:</p>
-	    			<select value={ icon }>
+	    			<select >
 					  <option value={cardCardImg}>Card</option>
 					  <option value={checkCardImg}>Check</option>
 					  <option value={moneyCardImg}>Cash</option>
@@ -69,10 +63,11 @@ const EditPayment = ({ activateEditMode, payment, addPaymentsInfo, idEdit, addNe
 	    		</div>
 
 	    		<div className="infoForm-title">
-					<p>Title: { title }</p>
+					<p>Title: </p>
 					<input
 						type='text'
 						name='title'
+						placeholder='Title'
 						value={ title }
 						onChange={ onChange }
 					/>
@@ -82,6 +77,7 @@ const EditPayment = ({ activateEditMode, payment, addPaymentsInfo, idEdit, addNe
 	    			<p>Description:</p>
 	    			<textarea value={ desc }
 	    				name='desc'
+	    				placeholder='Enter a description...'
 	    				className='textAreaDesc' 
 	    				maxLength = '255'
 	    				onChange={ onChange }
@@ -91,30 +87,35 @@ const EditPayment = ({ activateEditMode, payment, addPaymentsInfo, idEdit, addNe
 	    		<div className="infoForm-date">
 	    			<p>Payment Date:</p>
 	    			<input 
-	    				type="date"
+	    				type='date'
 	    				id='date' 
 	    				name='date'
+	    				value={ date }
 	    				onChange={ onChange }
 	    				required
 	    			/>
 	    		</div>
+	    		<div className='infoForm-baseErrorMsg infoForm-dateErrorMsg' > { dateError } </div>
 
 	    		<div className="infoForm-amount"> 
 	    			<p>Amount:</p>
-	    			$ 
+	    			<span> $ </span>
 					<input
-						type='text'
+						type='number'
+						id='amount' 
 						name='amount'
 						value={ amount }
-						min="0"
-						step=".01"
+						min='0'
+						step='.01'
 						onChange={ onChange }
 						required
 					/>
 	    		</div>
+	    		<div className='infoForm-baseErrorMsg infoForm-amountErrorMsg' > { amountError } </div>
 
 	    		{ displayAdd() }
     		
+
     		</form>
     	</div> 
     </div>
