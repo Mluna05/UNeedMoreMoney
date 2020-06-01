@@ -9,15 +9,13 @@ import PaymentList from './PaymentList';
 
 	const [ payments, setPayments ] = useState( [] ); // initialState: [{ title:'', icon:'', desc:'', date:'', amount:0, amountError:'', dateError:'' }]
 
-	const [ totalAmount, setTotalAmount ] = useState( 0 );
-
 	const [ editMode, setEditMode ] = useState( { editMode: false , id:'' } );
 
 	let amountError =''; 
 	let dateError =''; 
 
 
-	const activateEditMode = (  id:'' ) => {
+	const activateEditMode = (  id='' ) => {
 		let edtMod = !editMode.editMode;
 		setEditMode( { editMode:edtMod , id } );
 	}
@@ -30,14 +28,17 @@ import PaymentList from './PaymentList';
 
   		 let paymentDate  = new Date( document.getElementById("date").value ).toUTCString();
 
-  		 return new Date( paymentDate ) <= today ;
+  		 return new Date( paymentDate ) >= today ;
 	}
 
-	const validate = ( payment ) =>{
+	const validate = ( payment='', name='', value='' ) =>{
 
-		if( Math.sign(parseFloat(payment.amount)) <= 0 ){
+
+		if( Math.sign(parseFloat(value)) <= 0 || Math.sign(parseFloat(value)) === -0 )  {
+	
 			amountError='This amount must be greater than zero.'; 
 		}
+
 
 		if ( valiDate() ){
 			dateError='Dates must not be later than 7 days ago.'; 
@@ -47,6 +48,10 @@ import PaymentList from './PaymentList';
 			return false;
 		}
 
+		if( payment.amountError || payment.dateError ){
+			return false;
+		}
+		
 		return true;
 
 	}
@@ -54,25 +59,42 @@ import PaymentList from './PaymentList';
 
 	const addPaymentsInfo = ( id, name, value, payment ) => {	
 		
-		if ( name === 'date' || name === 'amount'){
+		if ( name === 'date' || name === 'amount' ){
 			
-			if ( validate(payment) ){
-				updatePayments( id, name, value, payment );
+			if ( validate(payment, name, value) ){
+				updatePayments( id, 
+								name, 
+								name==='amount'? parseFloat(value).toFixed(2) : value , 
+								payment ,   
+								name==='date'? 'dateError' : 'amountError'  , '' );
 			}else{
-				updatePayments( id, name==='date'? 'dateError' : 'amountError' , name==='date'? dateError : amountError, payment );
+				updatePayments( id, 
+								name, 
+								name==='amount'? parseFloat(value).toFixed(2) : value ,  
+								payment,   
+								name==='date'? 'dateError' : 'amountError'  , name==='date'? dateError : amountError );
 			}
 
 		} else{
-			updatePayments( id, name, value, payment );
+    		updatePayments( id, 
+    						name, 
+    						value, 
+    						payment );
 		}
 
 	}
 
-	const updatePayments = ( id, name, value, payment ) =>{
+
+	const updatePayments = ( id, name, value, payment, nameError='', msgError='' ) =>{
+
 		let paymentsUpdated = [...payments] ;
+
+      	payment[nameError] = msgError;
 		payment[name] = value;
+
 		paymentsUpdated[id] = payment;
 		setPayments( paymentsUpdated );
+
 	}
 
 	const addNewPayments = ( payment ) => {	
@@ -93,7 +115,7 @@ import PaymentList from './PaymentList';
 	return (
 	<div className="container">
 
-		<TopBar />
+		<TopBar payments={ payments }/>
 
 		<PaymentList payments={ payments } 
 					 activateEditMode={ activateEditMode }

@@ -1,37 +1,39 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 //icons add new
 import { FaWindowClose } from "react-icons/fa";
 
 //images
-import cardCardImg from '../images/payment-card.png';
-import checkCardImg from '../images/payment-check.jpg';
-import moneyCardImg from '../images/payment-money.jpg';
-import onlineCardImg from '../images/payment-online.jpg';
-import terminalCardImg from '../images/payment-terminal.png';
+import card from '../images/payment-card.png';
+import check from '../images/payment-check.jpg';
+import money from '../images/payment-money.jpg';
+import online from '../images/payment-online.jpg';
+import terminal from '../images/payment-terminal.png';
 
 
 const EditPayment = ({ activateEditMode, payment, addPaymentsInfo, idEdit, addNewPayments }) =>  {
 
-	const [newPayment, setNewPayment] = useState({});
+	const iconPayment = { card, check , money,  online, terminal };
 
  	if(!payment){
- 		payment = { title:'', icon:'', desc:'', date:'', amount:'0.00', amountError:'', dateError:'' };
+ 		payment = { title:'', icon:'', desc:'', date:'', amount:0, amountError:'', dateError:'' };
  	}
  	
  	let { title, icon, desc, date, amount, amountError, dateError } = {...payment};
 
 
  	const coseModal = () =>{
- 		activateEditMode( '' );
+
+ 		if( !(payment.amountError || payment.dateError) ){
+
+ 			activateEditMode( '' );
+ 		}
+ 		
  	}
 
  	const onChange = (e) => {
 	  	addPaymentsInfo( idEdit, e.target.name, e.target.value, payment );
  	}
-
- 		
-
 
 	const chargeNewPayment = () =>{
   		 	addNewPayments(payment);
@@ -39,6 +41,10 @@ const EditPayment = ({ activateEditMode, payment, addPaymentsInfo, idEdit, addNe
 
 	 const displayAdd = () =>{
 	 	return idEdit==='' ? <div className="btnAdd" onClick={ chargeNewPayment }> Add </div> : null;
+	 }
+
+	 const displayImg = ( icon ) =>{
+	 	return iconPayment[ icon || 'card' ];
 	 }
 
   return (
@@ -51,14 +57,16 @@ const EditPayment = ({ activateEditMode, payment, addPaymentsInfo, idEdit, addNe
     	<div className="infoForm">
     		<form>
 	    		<div className="infoForm-icon"> 
-	    			<img src={ checkCardImg } alt={ icon } />
+	    			<img src={ displayImg( icon ) } alt={ icon } />
 	    			<p>Type:</p>
-	    			<select >
-					  <option value={cardCardImg}>Card</option>
-					  <option value={checkCardImg}>Check</option>
-					  <option value={moneyCardImg}>Cash</option>
-					  <option value={onlineCardImg}>Online</option>
-					  <option value={terminalCardImg}>Point of Sale</option>
+	    			<select value={ icon }
+	    					name='icon'
+	    					onChange={ onChange }>
+					  <option value={ 'card' }>Card</option>
+					  <option value={ 'check' }>Check</option>
+					  <option value={ 'money' }>Cash</option>
+					  <option value={ 'online' } >Online</option>
+					  <option value={ 'terminal' }>Point of Sale</option>
 					</select>
 	    		</div>
 

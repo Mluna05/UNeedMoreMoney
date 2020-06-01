@@ -1,18 +1,20 @@
 import React from 'react';
 
 //images
-import cardCardImg from '../images/payment-card.png';
-import checkCardImg from '../images/payment-check.jpg';
-import moneyCardImg from '../images/payment-money.jpg';
-import onlineCardImg from '../images/payment-online.jpg';
-import terminalCardImg from '../images/payment-terminal.png';
+import card from '../images/payment-card.png';
+import check from '../images/payment-check.jpg';
+import money from '../images/payment-money.jpg';
+import online from '../images/payment-online.jpg';
+import terminal from '../images/payment-terminal.png';
 
 //icons update-delete
 import { FaWindowClose, FaEdit} from "react-icons/fa";
 
  const PaymentItem = ( { payment, id, dispEditModeUpdate, deleteItemfromList } ) => {
 
- 	const { title, desc, date, amount, icon} = payment;
+ 	const { title, desc, date, amount, icon } = payment;
+
+ 	const iconPayment = { card, check , money,  online, terminal };
 
  	const disEditMode = () =>{
  		dispEditModeUpdate( id );
@@ -22,11 +24,15 @@ import { FaWindowClose, FaEdit} from "react-icons/fa";
  		deleteItemfromList( id );
  	}
 
+ 	const displayImg = ( icon ) =>{
+	 	return iconPayment[ icon || 'card' ];
+	 }
+
   return (
     <div className="PaymentItem">
 
 	    <div className="ImgType">
-	    	<img src={ cardCardImg } alt={ icon } />
+	    	<img src={ displayImg( icon ) } alt={ icon } />
 		</div>
 
 		<div className="InfoContainer">

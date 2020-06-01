@@ -2,7 +2,21 @@ import React from 'react';
 import logo from '../images/uNeedMoreMoney.png';
 
 
- const TopBar = () =>  {
+ const TopBar = ( { payments } ) =>  {
+
+  const calcTotal = () =>{
+
+    let dataPayments = payments.reduce( ( total, payment ) =>  total  +  parseFloat( payment.amount ), 0 );
+    
+
+
+    if( dataPayments ){
+      return dataPayments.toFixed(2);
+    }
+    
+    return 0;
+  }
+
   return (
     <div className="TopBarContainer" >
 
@@ -12,7 +26,7 @@ import logo from '../images/uNeedMoreMoney.png';
     	</span>
 
     	<span className="TotalAmountContent" >
-	    	<div className="TotalAmounttext" > Total Amount: $ 100.00 </div>
+	    	<div className="TotalAmounttext" > Total Amount: $ { calcTotal() } </div>
     	</span>
 
  
